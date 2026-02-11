@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquitectura del Sistema Académico - UAC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .step-active { @apply bg-blue-600 text-white scale-110; }
+        .step-inactive { @apply bg-white text-slate-400 border-2 border-slate-100; }
+    </style>
+</head>
+<body class="bg-[#f8fafc] text-slate-900 pb-12">
+
+    <!-- Header Principal -->
+    <header class="bg-slate-900 text-white py-10 px-6 border-b-4 border-blue-600 shadow-xl">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <h1 class="text-3xl font-black tracking-tight mb-2 uppercase text-white">Arquitectura del Sistema Académico</h1>
+                <p class="text-slate-400 text-sm flex items-center justify-center md:justify-start gap-2">
+                    <i data-lucide="database" class="w-4 h-4"></i> Ingeniería de Sistemas | UAC 2026
+                </p>
+            </div>
+            <div class="flex gap-2 bg-slate-800 p-1 rounded-xl border border-slate-700">
+                <button onclick="switchTab(1)" id="btn-1" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all bg-blue-600 text-white shadow-lg">FASE 1</button>
+                <button onclick="switchTab(2)" id="btn-2" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-300">FASE 2</button>
+                <button onclick="switchTab(3)" id="btn-3" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-300">FASE 3</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 mt-8">
+        
+        <!-- Línea de tiempo de flujo -->
+        <div class="flex justify-between items-center mb-12 relative px-4">
+            <div class="absolute top-1/2 left-0 w-full h-1 bg-slate-200 -translate-y-1/2 z-0"></div>
+            
+            <div class="flex flex-col items-center gap-2 relative z-10">
+                <div id="step-icon-1" class="w-14 h-14 rounded-full flex items-center justify-center transition-all shadow-xl bg-blue-600 text-white scale-110">
+                    <i data-lucide="users"></i>
+                </div>
+                <span class="text-[10px] font-black uppercase tracking-widest text-blue-700">Insumos</span>
+            </div>
+
+            <div class="flex flex-col items-center gap-2 relative z-10">
+                <div id="step-icon-2" class="w-14 h-14 rounded-full flex items-center justify-center transition-all shadow-xl bg-white text-slate-400 border-2 border-slate-100">
+                    <i data-lucide="layers"></i>
+                </div>
+                <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Procesamiento</span>
+            </div>
+
+            <div class="flex flex-col items-center gap-2 relative z-10">
+                <div id="step-icon-3" class="w-14 h-14 rounded-full flex items-center justify-center transition-all shadow-xl bg-white text-slate-400 border-2 border-slate-100">
+                    <i data-lucide="trending-up"></i>
+                </div>
+                <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Análisis</span>
+            </div>
+        </div>
+
+        <!-- FASE 1: DICCIONARIO DE ENTIDADES -->
+        <section id="content-1" class="tab-content active transition-opacity duration-500">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Tarjeta Alumnos -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2.5 bg-slate-50 rounded-xl text-blue-500 shadow-inner"><i data-lucide="user"></i></div>
+                        <h4 class="font-black text-slate-800 uppercase tracking-tight text-sm">Alumnos</h4>
+                    </div>
+                    <div class="space-y-3 text-[11px]">
+                        <div class="flex justify-between border-b pb-2"><span>CodAlumno</span> <span class="bg-orange-100 text-orange-600 px-2 rounded-full font-black">PK</span></div>
+                        <div class="flex justify-between border-b pb-2"><span>DNI</span> <span class="bg-blue-50 text-blue-600 px-2 rounded-full font-black">Int</span></div>
+                        <div class="flex justify-between border-b pb-2"><span>Carrera</span> <span class="bg-blue-50 text-blue-600 px-2 rounded-full font-black">Str</span></div>
+                    </div>
+                </div>
+                <!-- Tarjeta Docentes -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2.5 bg-slate-50 rounded-xl text-indigo-500 shadow-inner"><i data-lucide="graduation-cap"></i></div>
+                        <h4 class="font-black text-slate-800 uppercase tracking-tight text-sm">Docentes</h4>
+                    </div>
+                    <div class="space-y-3 text-[11px]">
+                        <div class="flex justify-between border-b pb-2"><span>CodDocente</span> <span class="bg-orange-100 text-orange-600 px-2 rounded-full font-black">PK</span></div>
+                        <div class="flex justify-between border-b pb-2"><span>Especialidad</span> <span class="bg-blue-50 text-blue-600 px-2 rounded-full font-black">Str</span></div>
+                        <div class="flex justify-between border-b pb-2"><span>Grado</span> <span class="bg-blue-50 text-blue-600 px-2 rounded-full font-black">Str</span></div>
+                    </div>
+                </div>
+                <!-- Tarjeta Asignaturas -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2.5 bg-slate-50 rounded-xl text-emerald-500 shadow-inner"><i data-lucide="book-open"></i></div>
+                        <h4 class="font-black text-slate-800 uppercase tracking-tight text-sm">Asignaturas</h4>
+                    </div>
+                    <div class="space-y-3 text-[11px]">
+                        <div class="flex justify-between border-b pb-2"><span>CodAsig</span> <span class="bg-orange-100 text-orange-600 px-2 rounded-full font-black">PK</span></div>
+                        <div class="flex justify-between border-b pb-2"><span>Créditos</span> <span class="bg-blue-50 text-blue-600 px-2 rounded-full font-black">Int</span></div>
+                        <div class="flex justify-between border-b pb-2"><span>Horas</span> <span class="bg-blue-50 text-blue-600 px-2 rounded-full font-black">Int</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 bg-blue-50 border border-blue-100 p-5 rounded-2xl flex items-start gap-4">
+                <i data-lucide="info" class="text-blue-600 shrink-0 mt-1"></i>
+                <div>
+                    <h4 class="text-sm font-bold text-blue-900 mb-1">Nota Técnica: Dimensiones</h4>
+                    <p class="text-xs text-blue-800 leading-relaxed">Estas tablas actúan como Dimensiones en el modelo. Contienen datos maestros que categorizan las métricas finales.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FASE 2: PROCESAMIENTO -->
+        <section id="content-2" class="tab-content transition-opacity duration-500">
+            <div class="bg-white rounded-3xl shadow-xl border border-slate-200 p-8">
+                <div class="text-center mb-10">
+                    <span class="text-[10px] font-black bg-blue-100 text-blue-700 px-3 py-1 rounded-full uppercase">Power Pivot Engine</span>
+                    <h3 class="text-2xl font-black mt-3">Relación Multidimensional</h3>
+                </div>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-8 lg:gap-16">
+                    <div class="flex flex-col gap-4">
+                        <div class="px-6 py-4 bg-slate-50 border rounded-xl text-xs font-bold w-44">T_Docentes</div>
+                        <div class="px-6 py-4 bg-slate-50 border rounded-xl text-xs font-bold w-44">T_Asignaturas</div>
+                    </div>
+                    <div class="relative bg-slate-900 text-white p-8 rounded-3xl text-center shadow-2xl border border-slate-700">
+                        <i data-lucide="clipboard-list" class="mx-auto mb-4 text-blue-400 w-10 h-10"></i>
+                        <h4 class="font-black text-lg">CARGA ACADÉMICA</h4>
+                        <p class="text-[9px] text-slate-400 uppercase tracking-widest mt-2 border-t border-slate-700 pt-2">Fact Table</p>
+                    </div>
+                    <div class="px-6 py-4 bg-orange-600 text-white rounded-xl text-xs font-bold w-44 shadow-lg text-center">T_Notas (Salida)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FASE 3: ANÁLISIS -->
+        <section id="content-3" class="tab-content transition-opacity duration-500">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
+                    <h4 class="font-bold flex items-center gap-2 mb-8 uppercase text-xs text-slate-500 tracking-widest">
+                        <i data-lucide="bar-chart-3" class="w-4 h-4"></i> Promedio por Área
+                    </h4>
+                    <div class="space-y-6">
+                        <div class="area-item" data-val="76">
+                            <div class="flex justify-between text-[10px] font-black mb-1 uppercase"><span>Ciencias</span> <span>15.2</span></div>
+                            <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-blue-500 w-[76%]"></div></div>
+                        </div>
+                        <div class="area-item" data-val="74">
+                            <div class="flex justify-between text-[10px] font-black mb-1 uppercase"><span>Letras</span> <span>14.8</span></div>
+                            <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-indigo-500 w-[74%]"></div></div>
+                        </div>
+                        <div class="area-item" data-val="69">
+                            <div class="flex justify-between text-[10px] font-black mb-1 uppercase"><span>Ingeniería</span> <span>13.9</span></div>
+                            <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-slate-700 w-[69%]"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white p-5 rounded-3xl border shadow-sm">
+                        <div class="flex justify-between mb-2"><i data-lucide="check-circle" class="text-emerald-500"></i> <span class="text-green-600 font-bold text-xs">+4.2%</span></div>
+                        <div class="text-3xl font-black">78%</div>
+                        <div class="text-[9px] text-slate-400 font-black uppercase">Aprobación</div>
+                    </div>
+                    <div class="bg-white p-5 rounded-3xl border shadow-sm">
+                        <div class="flex justify-between mb-2"><i data-lucide="shield-check" class="text-blue-500"></i> <span class="text-blue-600 font-bold text-xs">+1.5%</span></div>
+                        <div class="text-3xl font-black">92%</div>
+                        <div class="text-[9px] text-slate-400 font-black uppercase">Eficiencia</div>
+                    </div>
+                    <div class="col-span-2 bg-slate-900 text-white p-6 rounded-3xl relative overflow-hidden">
+                        <h5 class="text-[10px] font-black text-blue-400 uppercase mb-2">Resultado</h5>
+                        <p class="text-sm">El modelado permite optimizar el seguimiento del rendimiento académico por cada facultad.</p>
+                        <i data-lucide="database" class="absolute -bottom-4 -right-4 text-white/5 w-20 h-20"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="mt-16 text-center border-t pt-10">
+        <p class="text-[10px] text-slate-400 font-mono tracking-widest uppercase mb-2">Proyecto: Los Mohamad All Yantal</p>
+        <p class="text-[9px] text-slate-300 font-bold uppercase">UAC Ingeniería de Sistemas - Cusco, 2026</p>
+    </footer>
+
+    <script>
+        // Inicializar iconos
+        lucide.createIcons();
+
+        function switchTab(tabId) {
+            // Ocultar todos los contenidos
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('content-' + tabId).classList.add('active');
+
+            // Actualizar botones del header
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white', 'shadow-lg');
+                btn.classList.add('text-slate-500');
+            });
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg');
+            activeBtn.classList.remove('text-slate-500');
+
+            // Actualizar iconos de progreso
+            for(let i=1; i<=3; i++) {
+                const icon = document.getElementById('step-icon-' + i);
+                const label = icon.nextElementSibling;
+                if(i <= tabId) {
+                    icon.className = "w-14 h-14 rounded-full flex items-center justify-center transition-all shadow-xl bg-blue-600 text-white scale-110";
+                    label.classList.add('text-blue-700');
+                    label.classList.remove('text-slate-400');
+                } else {
+                    icon.className = "w-14 h-14 rounded-full flex items-center justify-center transition-all shadow-xl bg-white text-slate-400 border-2 border-slate-100";
+                    label.classList.remove('text-blue-700');
+                    label.classList.add('text-slate-400');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
